@@ -2,13 +2,21 @@
 
 # do stuff
 
+import os
+import sys
 from ConfigParser import SafeConfigParser
 
 # Read in config file
 # TODO: Check file exists
 
-parser = SafeConfigParser()
-parser.read('splunkENV.ini')
+CONFIG = 'splunkENV.ini'
+
+if os.path.isfile(CONFIG):
+    parser = SafeConfigParser()
+    parser.read('splunkENV.ini')
+else:
+    print 'You don\'t have any config'
+    sys.exit(1)
 
 print parser.get('user', 'username')
 print parser.get('env', 'install_dir')
