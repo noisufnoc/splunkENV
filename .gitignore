@@ -60,4 +60,4 @@ target/
 *.swp
 .ropeproject/
 
-#splunkENV.ini
+splunkENV.ini
