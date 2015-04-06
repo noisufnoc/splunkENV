@@ -1,25 +1,30 @@
 #!/usr/bin/env python
 
-# do stuff
+__author__ = 'noisufnoc'
 
 import os
 import sys
+import tarfile
 from ConfigParser import SafeConfigParser
 
 # Read in config file
-# TODO: Check file exists
+# TODO: If I want to get crazy, let user provide config path other than default
 
 CONFIG = 'splunkENV.ini'
 
 if os.path.isfile(CONFIG):
     parser = SafeConfigParser()
     parser.read('splunkENV.ini')
+
+    USER = parser.get('user', 'username')
+    PASSWORD = parser.get('user', 'password')
+
+    LIC = parser.get('env', 'license')
+    DIR = parser.get('env', 'install_dir')
+    SPLUNK = parser.get('env', 'splunk')
 else:
     print 'You don\'t have any config'
     sys.exit(1)
-
-print parser.get('user', 'username')
-print parser.get('env', 'install_dir')
 
 # TODO: untar splunk as root into install_dir/env_name
 # TODO: set env_name if not set before
@@ -29,3 +34,6 @@ print parser.get('env', 'install_dir')
 # TODO: add user as admin role
 # TODO: add license
 # TODO: restart splunk
+
+def install(env_name):
+    # install it here
