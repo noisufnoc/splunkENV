@@ -37,3 +37,12 @@ else:
 
 def install(env_name):
     # install it here
+
+def config():
+    # config it here
+
+def main():
+    # do stuff, and then do more stuff
+
+if __name__ == '__main__':
+    main()
