@@ -4,11 +4,14 @@
 
 from ConfigParser import SafeConfigParser
 
+# Read in config file
+# TODO: Check file exists
+
 parser = SafeConfigParser()
 parser.read('splunkENV.ini')
 
 print parser.get('user', 'username')
-print parser.get('env', 'splunk_home')
+print parser.get('env', 'install_dir')
 
 # TODO: untar splunk as root into install_dir/env_name
 # TODO: set env_name if not set before
