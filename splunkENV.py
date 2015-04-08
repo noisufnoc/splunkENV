@@ -10,7 +10,6 @@ from ConfigParser import SafeConfigParser
 
 # Read in config file
 # TODO: If I want to get crazy, let user provide config path other than default
-# TODO: must be root, sorry
 # TODO: handle ports in use
 # TODO: misc error checking
 
