@@ -20,10 +20,13 @@ if os.path.isfile(CONFIG):
 
     USER = parser.get('user', 'username')
     PASSWORD = parser.get('user', 'password')
+    EMAIL = parser.get('user', 'email')
+    NAME = parser.get('user', 'name')
 
     LIC = parser.get('env', 'license')
     DIR = parser.get('env', 'install_dir')
     SPLUNK = parser.get('env', 'splunk')
+    ADMINPASS = parser.get('env', 'adminpass')
 else:
     print 'You don\'t have any config'
     sys.exit(1)
@@ -67,7 +70,9 @@ def main():
         env_name = sys.argv[1]
 
     # do stuff, and then do more stuff
-    install(env_name, LIC, SPLUNK, DIR)
+    status, env_path = install(env_name, LIC, SPLUNK, DIR)
+    config(env_path, LIC, USER, PASSWORD, EMAIL, NAME, ADMINPASS)
+
 
 if __name__ == '__main__':
     main()
