@@ -62,15 +62,19 @@ def config(env_path, license, user, password, email, name, adminpass):
 
 
 def main():
+    if not os.geteuid() == 0:
+        # gotta be root, sorry.
+        sys.exit('\nYou must be root to continue\n')
     if len(sys.argv) == 1:
         # No args, you suck
-        print 'You must name your env, son.'
-        sys.exit(1)
+        sys.exit('\nYou must name your env, son.\n')
     else:
         env_name = sys.argv[1]
 
-    # do stuff, and then do more stuff
     status, env_path = install(env_name, SPLUNK, DIR)
+    if not status:
+        sys.exit('\nOH NO! Something bad happened\n')
+
     config(env_path, LIC, USER, PASSWORD, EMAIL, NAME, ADMINPASS)
 
 
