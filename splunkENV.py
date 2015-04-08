@@ -35,14 +35,32 @@ else:
 # TODO: add license
 # TODO: restart splunk
 
-def install(env_name):
+
+def install(env_name, license, source, destination):
     # install it here
 
-def config():
+    source_tar = tarfile.open(source)
+    source_tar.extractall(destination)
+
+    env_path = destination + '/' + env_name
+    os.rename(destination + '/splunk', env_path)
+
+
+def config(user, password):
     # config it here
+    print 'foo'
+
 
 def main():
+    if len(sys.argv) == 1:
+        # No args, you suck
+        print 'You must name your env, son.'
+        sys.exit(1)
+    else:
+        env_name = sys.argv[1]
+
     # do stuff, and then do more stuff
+    install(env_name, LIC, SPLUNK, DIR)
 
 if __name__ == '__main__':
     main()
