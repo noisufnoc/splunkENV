@@ -1,0 +1,11 @@
+[user]
+email = user@domain.com
+name = Splunk User
+password = secretpassword
+username = user
+
+[env]
+adminpass = adminpassword
+install_dir = /where/does/it/go
+license = /path/to/license/file
+splunk = /path/to/splunk.tar.gz
