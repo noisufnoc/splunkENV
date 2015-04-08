@@ -11,6 +11,8 @@ from ConfigParser import SafeConfigParser
 # Read in config file
 # TODO: If I want to get crazy, let user provide config path other than default
 # TODO: must be root, sorry
+# TODO: handle ports in use
+# TODO: misc error checking
 
 CONFIG = 'splunkENV.ini'
 
@@ -30,8 +32,6 @@ if os.path.isfile(CONFIG):
 else:
     print 'You don\'t have any config'
     sys.exit(1)
-
-# TODO: handle ports in use
 
 
 def install(env_name, source, destination):
@@ -70,7 +70,7 @@ def main():
         env_name = sys.argv[1]
 
     # do stuff, and then do more stuff
-    status, env_path = install(env_name, LIC, SPLUNK, DIR)
+    status, env_path = install(env_name, SPLUNK, DIR)
     config(env_path, LIC, USER, PASSWORD, EMAIL, NAME, ADMINPASS)
 
 
