@@ -5,10 +5,12 @@ __author__ = 'noisufnoc'
 import os
 import sys
 import tarfile
+from subprocess import call
 from ConfigParser import SafeConfigParser
 
 # Read in config file
 # TODO: If I want to get crazy, let user provide config path other than default
+# TODO: must be root, sorry
 
 CONFIG = 'splunkENV.ini'
 
@@ -26,17 +28,10 @@ else:
     print 'You don\'t have any config'
     sys.exit(1)
 
-# TODO: untar splunk as root into install_dir/env_name
-# TODO: set env_name if not set before
-# TODO: start and accept license
 # TODO: handle ports in use
-# TODO: add user/password
-# TODO: add user as admin role
-# TODO: add license
-# TODO: restart splunk
 
 
-def install(env_name, license, source, destination):
+def install(env_name, source, destination):
     # install it here
 
     source_tar = tarfile.open(source)
@@ -45,10 +40,22 @@ def install(env_name, license, source, destination):
     env_path = destination + '/' + env_name
     os.rename(destination + '/splunk', env_path)
 
+    return True, env_path
 
-def config(user, password):
-    # config it here
-    print 'foo'
+
+def config(env_path, license, user, password, email, name, adminpass):
+    # config/start it here
+    splunk_bin = env_path + '/bin/splunk'
+    call([splunk_bin, 'start', '--accept-license'])
+    # set admin password
+    call([splunk_bin, 'edit', 'user', 'admin', '-password', adminpass,
+          '-roles', 'admin', '-auth', 'admin:changeme'])
+    call([splunk_bin, 'add', 'license', license,
+          '-auth', 'admin:%s' % adminpass])
+    call([splunk_bin, 'add', 'user', user, '-password',
+          password, '-role', 'admin', '-email', email,
+          '-realname', name, '-auth', 'admin:%s' % adminpass])
+    call([splunk_bin, 'restart'])
 
 
 def main():
