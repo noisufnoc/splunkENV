@@ -57,6 +57,7 @@ def config(env_path, license, user, password, email, name, adminpass):
     call([splunk_bin, 'add', 'user', user, '-password',
           password, '-role', 'admin', '-email', email,
           '-realname', name, '-auth', 'admin:%s' % adminpass])
+    call(['touch', '%s/etc/.ui_login' % env_path])
     call([splunk_bin, 'restart'])
 
 
