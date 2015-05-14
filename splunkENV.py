@@ -12,6 +12,7 @@ from ConfigParser import SafeConfigParser
 # TODO: If I want to get crazy, let user provide config path other than default
 # TODO: handle ports in use
 # TODO: misc error checking
+# TODO: handle dupe directories
 
 CONFIG = 'splunkENV.ini'
 
