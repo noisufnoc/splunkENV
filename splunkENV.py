@@ -13,6 +13,9 @@ from ConfigParser import SafeConfigParser
 # TODO: handle ports in use
 # TODO: misc error checking
 # TODO: handle dupe directories
+# TODO: upgrade splunk versions
+# TODO: update lic file
+# TODO: take args to add new functions
 
 CONFIG = 'splunkENV.ini'
 
@@ -42,6 +45,7 @@ def install(env_name, source, destination):
 
     env_path = destination + '/' + env_name
     os.rename(destination + '/splunk', env_path)
+    #os.rename(destination + '/splunkbeta', env_path)
 
     return True, env_path
 
