@@ -16,6 +16,7 @@ from ConfigParser import SafeConfigParser
 # TODO: upgrade splunk versions
 # TODO: update lic file
 # TODO: take args to add new functions
+# TODO: args: install, upgrade, lic, start, stop, status
 
 CONFIG = 'splunkENV.ini'
 
