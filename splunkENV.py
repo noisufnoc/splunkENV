@@ -46,7 +46,7 @@ def install(env_name, source, destination):
 
     env_path = destination + '/' + env_name
     os.rename(destination + '/splunk', env_path)
-    #os.rename(destination + '/splunkbeta', env_path)
+    # os.rename(destination + '/splunkbeta', env_path)
 
     return True, env_path
 
@@ -67,6 +67,12 @@ def config(env_path, license, user, password, email, name, adminpass):
     call([splunk_bin, 'restart'])
 
 
+def postinstall(env_path):
+    # finish it here
+    os.chdir(env_path)
+    return True
+
+
 def main():
     if not os.geteuid() == 0:
         # gotta be root, sorry.
@@ -82,6 +88,8 @@ def main():
         sys.exit('\nOH NO! Something bad happened\n')
 
     config(env_path, LIC, USER, PASSWORD, EMAIL, NAME, ADMINPASS)
+
+    postinstall(env_path)
 
 
 if __name__ == '__main__':
